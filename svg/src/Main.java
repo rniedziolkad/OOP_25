@@ -25,5 +25,22 @@ public class Main {
         segment.b.y = 3.0;
 
         System.out.println(segment.length());
+        Segment[] segments = new Segment[2];
+        segments[0] = segment;
+
+        segments[1] = new Segment();
+        segments[1].a = new Point();
+        segments[1].b = new Point();
+        segments[1].a.x = 0.0;
+        segments[1].a.y = 0.0;
+        segments[1].b.x = 7.5;
+        segments[1].b.y = 5.0;
+
+        // segment.maxSegment(segments); tak nie robimy, metoda statyczna
+        Segment result = Segment.maxSegment(segments); //wywołujemy na rzecz klasy
+        System.out.println("Najdluższy: "+result.length());
+
     }
+
+
 }
