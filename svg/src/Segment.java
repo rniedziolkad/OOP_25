@@ -1,7 +1,12 @@
 import static java.lang.Math.pow;
 
 public class Segment {
-    public Point a, b;
+    private final Point a, b;
+
+    public Segment(Point a, Point b) {
+        this.a = new Point(a);      // dokonujemy kopiowania konstruktorem kopiującym
+        this.b = new Point(b);
+    }
 
     public double length(){
         return Math.sqrt(pow(a.getX()-b.getX(), 2) + pow(a.getY()-b.getY(), 2));
@@ -17,5 +22,13 @@ public class Segment {
                 max = arr[i];
         }
         return max;
+    }
+
+    @Override
+    public String toString() {
+        return "Segment{" +
+                "a=" + a +
+                ", b=" + b +
+                '}';
     }
 }
