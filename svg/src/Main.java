@@ -45,6 +45,8 @@ public class Main {
         System.out.println("Scene:");
         System.out.println(scene.toSvg());
 
+        System.out.println(polyCopy.boundingBox());
+
     }
 
 

@@ -35,4 +35,21 @@ public class Polygon {
                 + this
                 +"\" style=\"fill:none;stroke:purple;stroke-width:3\" />";
     }
+
+    public BoundingBox boundingBox(){
+        if(vertices.length == 0){
+            return new BoundingBox(0,0,0,0);
+        }
+        double minX = vertices[0].getX();
+        double maxX = vertices[0].getX();
+        double minY = vertices[0].getY();
+        double maxY = vertices[0].getY();
+        for(int i=1; i < vertices.length; i++){
+            if(minX > vertices[i].getX()) minX = vertices[i].getX();
+            if(maxX < vertices[i].getX()) maxX = vertices[i].getX();
+            if(minY > vertices[i].getY()) minY = vertices[i].getY();
+            if(maxY < vertices[i].getY()) maxY = vertices[i].getY();
+        }
+        return new BoundingBox(minX, minY, maxX-minX, maxY-minY);
+    }
 }
