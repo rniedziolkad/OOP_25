@@ -27,6 +27,23 @@ public class Main {
         System.out.println(poly.toSvg());
 
 
+        SvgScene scene = new SvgScene();
+        scene.addPolygon(poly);
+        Polygon polyCopy = new Polygon(poly);
+        scene.addPolygon(polyCopy);
+        polyCopy.setPoint(0, 0, 0);
+        polyCopy.setPoint(1, 0, 30);
+        polyCopy.setPoint(2, 40, 0);
+
+        Polygon square = new Polygon(new Point[]{
+                new Point(40, 40),
+                new Point(40, 90),
+                new Point(90, 90),
+                new Point(90, 40)
+        });
+        scene.addPolygon(square);
+        System.out.println("Scene:");
+        System.out.println(scene.toSvg());
 
     }
 
