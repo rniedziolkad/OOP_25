@@ -24,6 +24,7 @@ public class Main {
 
         p1.setX(60);
         System.out.println(poly);
+        System.out.println(poly.toSvg());
 
 
 

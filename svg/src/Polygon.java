@@ -12,8 +12,16 @@ public class Polygon {
 
     @Override
     public String toString() {
-        return "Polygon{" +
-                "vertices=" + Arrays.toString(vertices) +
-                '}';
+        StringBuilder s = new StringBuilder();
+        for(Point p : vertices){
+            s.append(p.getX()).append(",").append(p.getY()).append(" ");
+        }
+        return s.toString().trim();
+    }
+
+    public String toSvg(){
+        return "<polygon points=\""
+                + this
+                +"\" style=\"fill:none;stroke:purple;stroke-width:3\" />";
     }
 }
