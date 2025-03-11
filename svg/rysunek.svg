@@ -1,5 +1,4 @@
-<svg width="180.0" height="180.0" viewBox="-40.0 -40.0 180.0 180.0" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="100.0,100.0 140.0,100.0 140.0,140.0 100.0,140.0" style = "fill: red; stroke: black; stroke-width: 2.0" />
-    <polygon points="-40.0,-40.0 0.0,30.0 40.0,0.0" style = "fill: red; stroke: black; stroke-width: 2.0" />
-    <polygon points="40.0,40.0 40.0,90.0 90.0,90.0 90.0,40.0" style = "fill: none; stroke: black; stroke-width: 1.0" />
+<svg width="180.0" height="180.0" viewBox="-40.0 -40.0 180.0 180.0" xmlns="http://www.w3.org/2000/svg"><polygon points="100.0,100.0 140.0,100.0 140.0,140.0 100.0,140.0" style = "fill: red; stroke: black; stroke-width: 2.0" />
+<polygon points="-40.0,-40.0 0.0,30.0 40.0,0.0" style = "fill: red; stroke: black; stroke-width: 2.0" />
+<polygon points="40.0,40.0 40.0,90.0 90.0,90.0 90.0,40.0" style = "fill: none; stroke: black; stroke-width: 1.0" />
 </svg>

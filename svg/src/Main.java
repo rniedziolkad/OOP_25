@@ -54,6 +54,12 @@ public class Main {
         System.out.println("square2: "+squre2);
         scene.addPolygon(squre2);
 
+        // TODO: tworzenie elipsy
+        // środek elispy (punkt), rx, ry, style
+//        Ellipse ellipse = new Ellipse(new Point(-50, -50), 30, 30, style);
+//        System.out.println(ellipse);
+//        scene.addPolygon(ellipse);
+
         System.out.println(polyCopy.boundingBox());
         scene.save("rysunek.svg");
     }
