@@ -1,19 +1,22 @@
 
 public class Polygon {
     private final Point[] vertices;
+    private Style style;
 
     public Polygon(Point[] vertices) {
+        this(vertices, new Style("none", "black", 1));
+    }
+
+    public Polygon(Polygon other) {
+        this(other.vertices, other.style);
+    }
+
+    public Polygon(Point[] vertices, Style style){
         this.vertices = new Point[vertices.length];
         for(int i=0; i< vertices.length; i++){
             this.vertices[i] = new Point(vertices[i]);
         }
-    }
-
-    public Polygon(Polygon other) {
-        this.vertices = new Point[other.vertices.length];
-        for(int i=0; i<other.vertices.length; i++){
-            this.vertices[i] = new Point(other.vertices[i]);
-        }
+        this.style = style;
     }
 
     public void setPoint(int ix, int x, int y){
@@ -33,7 +36,7 @@ public class Polygon {
     public String toSvg(){
         return "<polygon points=\""
                 + this
-                +"\" style=\"fill:none;stroke:purple;stroke-width:3\" />";
+                +"\" "+style.toSvg()+" />";
     }
 
     public BoundingBox boundingBox(){
