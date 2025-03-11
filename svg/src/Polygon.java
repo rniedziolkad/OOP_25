@@ -3,6 +3,18 @@ public class Polygon {
     private final Point[] vertices;
     private Style style;
 
+    public static Polygon square(Segment diagonal, Style style){
+        Segment[] perpendiculars = diagonal.perpendicularSegments(
+                diagonal.getCenter(), diagonal.length()/2
+        );
+        return new Polygon(new Point[]{
+                diagonal.getA(),
+                perpendiculars[0].getB(),
+                diagonal.getB(),
+                perpendiculars[1].getB()
+        }, style);
+    }
+
     public Polygon(Point[] vertices) {
         this(vertices, new Style("none", "black", 1));
     }

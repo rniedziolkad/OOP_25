@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -50,10 +49,10 @@ public class Main {
         System.out.println(scene.toSvg());
 
         // tworzenie kwadratu
-        Segment seg = new Segment(new Point(100, 100), new Point(140, 140));
-        Segment[] perpendiculars = seg.perpendicularSegments(new Point(100, 100));
-        System.out.println("Prostopadłe: "+ Arrays.toString(perpendiculars));
-
+        Segment diag = new Segment(new Point(100, 100), new Point(140, 140));
+        Polygon squre2 = Polygon.square(diag, style);
+        System.out.println("square2: "+squre2);
+        scene.addPolygon(squre2);
 
         System.out.println(polyCopy.boundingBox());
         scene.save("rysunek.svg");

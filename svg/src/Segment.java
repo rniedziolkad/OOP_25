@@ -10,13 +10,31 @@ public class Segment {
 
     // zwraca dwa możliwe odcinki prostopadłe zaczynające się w punkcie origin
     public Segment[] perpendicularSegments(Point origin){
+        return perpendicularSegments(origin, length());
+    }
+
+    public Segment[] perpendicularSegments(Point origin, double length){
         double dx = b.getX() - a.getX();
         double dy = b.getY() - a.getY();
+        dx = dx/length() * length;
+        dy = dy/length() * length;
 
         return new Segment[]{
                 new Segment(origin, new Point(origin.getX()+dx, origin.getY()-dy)),
                 new Segment(origin, new Point(origin.getX()-dx, origin.getY()+dy))
         };
+    }
+
+    public Point getA() {
+        return a;
+    }
+
+    public Point getB() {
+        return b;
+    }
+
+    public Point getCenter() {
+        return new Point((a.getX()+b.getX())/2, (a.getY()+b.getY())/2);
     }
 
     public double length(){
@@ -42,4 +60,6 @@ public class Segment {
                 ", b=" + b +
                 '}';
     }
+
+
 }
