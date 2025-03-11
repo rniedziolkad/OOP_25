@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -20,7 +21,9 @@ public class Main {
         Point[] arr = {p1, p2, p1};
         arr[2] = new Point(30, 65);
 
-        Polygon poly = new Polygon(arr);
+        // tworzenie stylu
+        Style style = new Style("red", "black", 2.0);
+        Polygon poly = new Polygon(arr, style);
         System.out.println(poly);
 
         p1.setX(60);
@@ -46,9 +49,14 @@ public class Main {
         System.out.println("Scene:");
         System.out.println(scene.toSvg());
 
+        // tworzenie kwadratu
+        Segment seg = new Segment(new Point(100, 100), new Point(140, 140));
+        Segment[] perpendiculars = seg.perpendicularSegments(new Point(100, 100));
+        System.out.println("Prostopadłe: "+ Arrays.toString(perpendiculars));
+
+
         System.out.println(polyCopy.boundingBox());
         scene.save("rysunek.svg");
-
     }
 
 
