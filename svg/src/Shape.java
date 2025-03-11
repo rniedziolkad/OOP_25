@@ -6,4 +6,5 @@ public abstract class Shape {
     }
     // metoda abstrakcyjna, bez implementacji
     public abstract String toSvg();
+    public abstract BoundingBox boundingBox();
 }

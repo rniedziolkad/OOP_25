@@ -45,12 +45,14 @@ public class Polygon extends Shape{
         return s.toString().trim();
     }
 
+    @Override
     public String toSvg(){
         return "<polygon points=\""
                 + this
                 +"\" "+style.toSvg()+" />";
     }
 
+    @Override
     public BoundingBox boundingBox(){
         if(vertices.length == 0){
             return new BoundingBox(0,0,0,0);

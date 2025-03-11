@@ -2,22 +2,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SvgScene {
-    private final Polygon[] polygons;
+    private final Shape[] shapes;
     private int ix;
 
     public SvgScene() {
-        this.polygons = new Polygon[3];
+        this.shapes = new Shape[3];
         ix = 0;
     }
 
-    public void addPolygon(Polygon polygon) {
-        polygons[ix] = polygon;
-        ix = (ix+1) % polygons.length;
+    // korzysta z polimorfizmu
+    // czyli tutaj faktu, że Polygon jest też Shape
+    public void addShape(Shape shape) {
+        shapes[ix] = shape;
+        ix = (ix+1) % shapes.length;
     }
 
     public String toSvg() {
         StringBuilder sb = new StringBuilder();
-        for(Polygon p: polygons){
+        for(Shape p: shapes){
             if(p != null)
                 sb.append(p.toSvg()).append("\n");
         }
@@ -29,7 +31,7 @@ public class SvgScene {
         double maxX = Double.NEGATIVE_INFINITY;
         double minY = Double.POSITIVE_INFINITY;
         double maxY = Double.NEGATIVE_INFINITY;
-        for (Polygon p: polygons){
+        for (Shape p: shapes){
             if (p!=null) {
                 BoundingBox bb = p.boundingBox();
                 minX = Math.min(minX, bb.x());
@@ -46,7 +48,7 @@ public class SvgScene {
         BoundingBox bb = boundingBox();
         writer.write("<svg width=\""+bb.width()+"\" height=\""+bb.height());
         writer.write("\" viewBox=\""+bb.x()+" "+bb.y()+" "+bb.width()+" "+bb.height()+"\" xmlns=\"http://www.w3.org/2000/svg\">");
-        for(Polygon p : polygons){
+        for(Shape p : shapes){
             writer.write(p.toSvg()+"\n");
         }
         writer.write("</svg>");
