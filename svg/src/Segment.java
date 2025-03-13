@@ -20,8 +20,8 @@ public class Segment {
         dy = dy/length() * length;
 
         return new Segment[]{
-                new Segment(origin, new Point(origin.getX()+dx, origin.getY()-dy)),
-                new Segment(origin, new Point(origin.getX()-dx, origin.getY()+dy))
+                new Segment(origin, new Point(origin.getX()+dy, origin.getY()-dx)),
+                new Segment(origin, new Point(origin.getX()-dy, origin.getY()+dx))
         };
     }
 
