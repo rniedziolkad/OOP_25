@@ -25,16 +25,16 @@ public class SvgScene {
     public String toSvg()
     {
         BoundingBox boundingBox = this.sceneBox();
-        String result = String.format(Locale.ENGLISH,
+        StringBuilder result = new StringBuilder(String.format(Locale.ENGLISH,
                 "<svg width=\"%f\" height=\"%f\" xmlns=\"http://www.w3.org/2000/svg\">",
-                boundingBox.width(), boundingBox.height());
+                boundingBox.width(), boundingBox.height()));
         for(var shape : shapes) {
             if(shape ==  null)
                 continue;
-            result += "\n\t" + shape.toSvg();
+            result.append("\n\t").append(shape.toSvg());
         }
-        result += "\n</svg>";
-        return result;
+        result.append("\n</svg>");
+        return result.toString();
     }
 
     public void save(String path) throws IOException {

@@ -23,7 +23,11 @@ public class Main {
                 new Vec2(600, 260)
         });
         SolidFillShapeDecorator redPentagon = new SolidFillShapeDecorator(pentagon, "red");
-
+        TransformationDecorator transformedRedPentagon = new TransformationDecorator.Builder()
+                .translate(new Vec2(50, 50))
+                .scale(new Vec2(0.5, 1))
+                .rotate(180, new Vec2(300, 410))
+                .build(redPentagon);
 
         Shape ellipse = new Ellipse(new Vec2(500, 700), 400, 100);
         ellipse = new SolidFillShapeDecorator(ellipse, "green");
@@ -32,7 +36,7 @@ public class Main {
         SvgScene scene = new SvgScene();
         scene.addShape(triangle);
         scene.addShape(rectangle);
-        scene.addShape(redPentagon);
+        scene.addShape(transformedRedPentagon);
         scene.addShape(ellipse);
         scene.save("result.svg");
     }
