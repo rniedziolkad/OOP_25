@@ -22,10 +22,15 @@ public class Main {
                 "Ania", "Kowalska",
                 LocalDate.of(2018, 3, 13)
         ));
+        personList.add(new Person(
+                "Adam", "Kowalski",
+                LocalDate.of(2013, 10, 1)
+        ));
         System.out.println(personList.get(0).adopt(personList.get(1)));
         System.out.println(personList.get(0).adopt(personList.get(1)));
         System.out.println(personList.get(0).adopt(personList.get(2)));
         System.out.println(personList.get(0).adopt(personList.get(0)));
+        personList.get(0).adopt(personList.get(3));
 
         System.out.println("Rozmiar listy: "+personList.size());
         // wyświetalnie elementów listy
@@ -35,8 +40,16 @@ public class Main {
 
         System.out.println(personList.get(2).getYoungestChild());
         System.out.println(personList.get(0).getYoungestChild());
+        System.out.println(personList.get(0).getChildren());
+        System.out.println();
 
+        Family family = new Family();
+        family.add(personList.get(0));
+        family.add(personList.get(1));
+        family.add(personList.get(2));
 
-
+        System.out.println(family.get("Ania Kowalska"));
+        System.out.println(family.get("Kuba Kowalski"));
+        System.out.println(family.get("Adam Kowalski"));
     }
 }
