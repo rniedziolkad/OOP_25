@@ -55,5 +55,7 @@ public class Main {
         System.out.println(family.get("Kuba Kowalski"));
         System.out.println(family.get("Adam Kowalski"));
 
+        // Na 4 punkty -- kolowkium I 2024 (3 kroki = 1 punkt)
+        // czas do terminu I kolokwium 2025
     }
 }
