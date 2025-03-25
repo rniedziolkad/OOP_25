@@ -44,12 +44,16 @@ public class Main {
         System.out.println();
 
         Family family = new Family();
-        family.add(personList.get(0));
-        family.add(personList.get(1));
-        family.add(personList.get(2));
-
+        family.add(personList.get(0), personList.get(1));
+        family.add(personList.get(3));
+        family.add(new Person(
+                "Kuba", "Kowalski",
+                LocalDate.of(2013, 5, 5)
+        ));
         System.out.println(family.get("Ania Kowalska"));
         System.out.println(family.get("Kuba Kowalski"));
+        System.out.println(family.get("Kuba Kowalski"));
         System.out.println(family.get("Adam Kowalski"));
+
     }
 }
