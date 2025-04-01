@@ -1,16 +1,14 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
+
 import java.util.*;
 //import java.util.TreeSet;
 
-public class Person implements Comparable<Person>{
+public class Person implements Comparable<Person>, Serializable{
     private final String name, surname;
     private final LocalDate birth;
     private final LocalDate death;
@@ -98,6 +96,24 @@ public class Person implements Comparable<Person>{
             System.err.println(e.getMessage());
         }
         return family.values().stream().toList();
+    }
+
+    public static void toBinaryFile(List<Person> personList, String fileName) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            out.writeObject(personList);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static List<Person> fromBinaryFile(String fileName) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
+            Object o = in.readObject();
+            return (List<Person>)o; // rzutowanie na List<Person>
+        } catch (IOException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        return new ArrayList<>();
     }
 
     public boolean adopt(Person child) throws ParentingAgeException {
