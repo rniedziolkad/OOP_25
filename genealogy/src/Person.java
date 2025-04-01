@@ -46,15 +46,28 @@ public class Person implements Comparable<Person>{
         return new Person(fullName[0], fullName[1], birth, death);
     }
 
-    public static List<Person> fromCsv(String csvFileName) {
-        List<Person> personList = new ArrayList<>();
+    public static List<Person> fromCsv(String csvFileName) throws AmbiguousPersonException {
+        Map<String, Person> family = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
             br.readLine();      // pozbywamy się nagłówka
             String line;
             while ((line = br.readLine()) != null) {
                 try {
                     Person readPerson = fromCsvLine(line);  //przetwarzamy linię
-                    personList.add(readPerson);
+                    if (family.containsKey(readPerson.getFullName()))
+                        throw new AmbiguousPersonException(readPerson.getFullName());
+                    family.put(readPerson.getFullName(), readPerson);
+                    // dodawanie dziecka do rodziców
+                    String[] elements = line.split(",", -1);
+                    Person parentA = family.get(elements[3]);
+                    Person parentB = family.get(elements[4]);
+                    if (parentA != null) {
+                        parentA.adopt(readPerson);
+                    }
+                    if (parentB != null){
+                        parentB.adopt(readPerson);
+                    }
+
                 } catch (NegativeLifespanException e) {
                     // po prostu ignorujemy linię i nie dodajemy do listy
                     // nie ma potrzeby przerywania wczytywania całego pliku
@@ -65,7 +78,7 @@ public class Person implements Comparable<Person>{
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return personList;
+        return family.values().stream().toList();
     }
 
     public boolean adopt(Person child) {
