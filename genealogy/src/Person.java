@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 //import java.util.TreeSet;
 
@@ -62,10 +63,28 @@ public class Person implements Comparable<Person>{
                     Person parentA = family.get(elements[3]);
                     Person parentB = family.get(elements[4]);
                     if (parentA != null) {
-                        parentA.adopt(readPerson);
+                        try {
+                            parentA.adopt(readPerson);
+                        } catch (ParentingAgeException e){
+                            System.out.println(e.getMessage());
+                            System.out.println("Are you sure you want to adopt? [Y/N(default)]");
+                            Scanner sc= new Scanner(System.in);
+                            if(sc.nextLine().equalsIgnoreCase("Y")){
+                                e.getParent().children.add(e.getChild());
+                            }
+                        }
                     }
                     if (parentB != null){
-                        parentB.adopt(readPerson);
+                        try {
+                            parentB.adopt(readPerson);
+                        } catch (ParentingAgeException e){
+                            System.out.println(e.getMessage());
+                            System.out.println("Are you sure you want to adopt? [Y/N(default)]");
+                            Scanner sc= new Scanner(System.in);
+                            if(sc.nextLine().equalsIgnoreCase("Y")){
+                                e.getParent().children.add(e.getChild());
+                            }
+                        }
                     }
 
                 } catch (NegativeLifespanException e) {
@@ -81,9 +100,14 @@ public class Person implements Comparable<Person>{
         return family.values().stream().toList();
     }
 
-    public boolean adopt(Person child) {
+    public boolean adopt(Person child) throws ParentingAgeException {
         if (child == this)
             return false;
+        if (this.birth.until(child.birth).getYears() < 15 ||
+            (this.death != null && this.death.isBefore(child.birth))) {
+            throw new ParentingAgeException(this, child);
+        }
+
         return children.add(child);
     }
 
