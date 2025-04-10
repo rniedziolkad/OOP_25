@@ -1,4 +1,5 @@
 import java.util.List;
+//import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,11 +18,21 @@ public class Main {
                 }
             }
 
-            String umlData = Person.umlFromList(family);
+            String umlData = Person.umlFromList(
+                    family,
+                    uml -> uml.replaceFirst("\\{", "#yellow {"),
+//                        Function.identity() // identity -- funkcja nic nie zmieniająca
+                        p -> Person.selectDeceased(family).contains(p) ||
+                                Person.selectOldestAlive(family) == p
+                    );
             System.out.println(umlData);
             PlantUMLRunner.generateDiagram(umlData,
                     "/home/student/Pobrane/", "diagram.png");
 
+            System.out.println(Person.selectName(family, "anna"));
+            System.out.println(Person.sortedByBirth(family));
+            System.out.println(Person.selectDeceased(family));
+            System.out.println(Person.selectOldestAlive(family));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
