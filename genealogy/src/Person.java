@@ -164,4 +164,28 @@ public class Person implements Comparable<Person>, Serializable{
     public int compareTo(Person o) {
         return this.birth.compareTo(o.birth);
     }
+
+    public String getUMLObject() {
+        return "object \""+getFullName()+"\" {\n" +
+                "  birth = " +birth +  "\n" +
+                "  death = " +death + "\n" +
+                "}\n";
+    }
+
+    public static String umlFromList(List<Person> personList) {
+        StringBuilder umlData = new StringBuilder();
+        for (Person p : personList) {
+            umlData.append(p.getUMLObject());
+        }
+        for (Person p : personList) {
+            for (Person child : p.getChildren()) {
+                umlData.append("\"").append(child.getFullName()).append("\"")
+                        .append(" --> ")
+                        .append("\"").append(p.getFullName()).append("\"")
+                        .append("\n");
+            }
+        }
+
+        return umlData.toString();
+    }
 }
