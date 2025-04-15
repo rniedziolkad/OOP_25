@@ -44,6 +44,7 @@ public class Main {
         System.out.println("In range: "+Utils.countInRange(ints, 0, 4));
         System.out.println("In range: "+Utils.countInRange(dubs, 0.0, 4.0));
 
-
+        CollectionComparator<List<? extends Number>> comparator = new CollectionComparator<>();
+        System.out.println(comparator.compare(ints, dubs));
     }
 }
