@@ -1,4 +1,6 @@
-import java.util.AbstractList;
+import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class CustomList<E> extends AbstractList<E> {
     private class Node{
@@ -113,5 +115,40 @@ public class CustomList<E> extends AbstractList<E> {
         return value;
     }
 
+    @Override
+    public Iterator<E> iterator() {
+        return new Itr(head);
+    }
+
+    @Override
+    public Stream<E> stream() {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(this.iterator(), Spliterator.ORDERED),
+                false
+        );
+    }
+
+    private class Itr implements Iterator<E> {
+        Node current;
+
+        public Itr(Node current) {
+            this.current = current;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            E value = current.value;
+            current = current.next;
+            return value;
+        }
+    }
 
 }

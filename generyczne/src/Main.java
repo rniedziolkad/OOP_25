@@ -23,5 +23,9 @@ public class Main {
         System.out.println("list[2] = "+list.get(2));
 //        System.out.println("list[-1] = "+list.get(-1));
 
+        for(Integer i : list) {
+            System.out.println(i);
+        }
+
     }
 }
