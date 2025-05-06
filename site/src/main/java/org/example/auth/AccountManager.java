@@ -64,5 +64,38 @@ public class AccountManager {
         return false;
     }
 
+    public Account getAccount(String username) {
+        try {
+            PreparedStatement stmt = db.getConnection().prepareStatement("""
+                    SELECT id, username FROM users WHERE username = ?;
+                    """);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Account(rs.getInt("id"), rs.getString("username"));
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public Account getAccount(int id) {
+        try {
+            PreparedStatement stmt = db.getConnection().prepareStatement("""
+                    SELECT id, username FROM users WHERE id = ?;
+                    """);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Account(rs.getInt("id"), rs.getString("username"));
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
 }

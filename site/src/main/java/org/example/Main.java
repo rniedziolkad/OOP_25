@@ -13,6 +13,11 @@ public class Main {
         am.register("user2", "qwerty");
         System.out.println("Uwierzytelnianie: " + am.authenticate("user2", "qwerty"));
 
+        System.out.println(am.getAccount("err"));
+        System.out.println(am.getAccount("user1"));
+
+        System.out.println(am.getAccount(0));
+        System.out.println(am.getAccount(2));
         db.disconnect();
     }
 }
