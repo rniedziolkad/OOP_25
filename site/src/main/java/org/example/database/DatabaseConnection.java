@@ -1,36 +1,48 @@
 package org.example.database;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private Connection connection;
 
-    public void connect(String dbPath){
+    static private final Map<String, Connection> connections = new HashMap<>();
+
+    static public Connection getConnection() {
+        return getConnection("");
+    }
+
+    static public Connection getConnection(String name) {
+        return connections.get(name);
+    }
+
+    static public void connect(String filePath) {
+        connect(filePath, "");
+    }
+
+    static public void connect(String filePath, String connectionName){
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + filePath);
+            connections.put(connectionName, connection);
         } catch (SQLException e) {
-            // wyrzucamy RuntimeException, bo po błędzie połączenia z bazą
-            // dalsza część programu nie ma sensu i możemy zakończyć z błedem
             throw new RuntimeException(e);
         }
     }
 
-    public void disconnect() {
-        if (connection == null)
-            return;
-
-        try {
-//            connection.commit();
-            connection.close();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
+    static public void disconnect() {
+        disconnect("");
     }
 
-    public Connection getConnection() {
-        return connection;
+    static public void disconnect(String connectionName){
+        try {
+            Connection connection = connections.get(connectionName);
+            connection.close();
+            connections.remove(connectionName);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
+
+
