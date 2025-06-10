@@ -1,0 +1,37 @@
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<VBox fx:controller="pl.umcs.oop.powtorzeniegui.Controller" xmlns:fx="http://javafx.com/fxml">
+    <TitledPane animated="false" collapsible="false" text="Connection" VBox.vgrow="NEVER">
+        <HBox alignment="CENTER" spacing="5.0">
+            <Label text="Address"/>
+            <TextField fx:id="addressField" text="localhost"/>
+            <Label text="Port"/>
+            <TextField fx:id="portField" text="5000"/>
+            <Button mnemonicParsing="false" onAction="#onStartServerClicked" text="Start Server &amp; Connect"/>
+            <Button mnemonicParsing="false" onAction="#onConnectClicked" text="Connect"/>
+        </HBox>
+    </TitledPane>
+    <TitledPane animated="false" collapsible="false" maxHeight="Infinity" text="Canvas" VBox.vgrow="ALWAYS">
+        <VBox alignment="TOP_CENTER" maxHeight="Infinity" spacing="5.0">
+            <HBox alignment="CENTER" spacing="5.0">
+                <Label text="Color"/>
+                <ColorPicker fx:id="colorPicker">
+                    <value>
+                        <Color red="0.729411780834198" green="0.8549019694328308"
+                               blue="0.3333333432674408"/>
+                    </value>
+                </ColorPicker>
+                <Label text="Radius"/>
+                <Slider fx:id="radiusSlider" blockIncrement="5.0" showTickLabels="true" showTickMarks="true"
+                        value="5.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="514.0" prefWidth="514.0"
+                  style="-fx-background-color: white; -fx-border-color: black;">
+                <Canvas onMouseClicked="#onMouseClicked" fx:id="canvas" height="512.0" layoutX="1.0" layoutY="1.0" width="512.0"/>
+            </Pane>
+        </VBox>
+    </TitledPane>
+</VBox>
