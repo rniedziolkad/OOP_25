@@ -20,9 +20,7 @@ public class ClientHandler implements Runnable {
 
     private void broadcast(String message) {
         for (ClientHandler c : clients) {
-            if (c.login != null) {
-                c.sendMessage(message);
-            }
+            c.sendMessage(message);
         }
     }
 
@@ -38,7 +36,7 @@ public class ClientHandler implements Runnable {
             out = new PrintWriter(socket.getOutputStream(), true);
             out.println("Witaj w czacie! podaj login: ");
             String message = in.readLine();
-            broadcast("Nowy klient: "+message);
+            broadcast("LOGIN "+message);
             this.login = message;
             while((message = in.readLine()) != null) {
                 System.out.println("Otrzymano wiadomość: "+message);
