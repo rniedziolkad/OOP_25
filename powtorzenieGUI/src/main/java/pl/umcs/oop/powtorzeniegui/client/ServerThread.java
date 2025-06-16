@@ -33,7 +33,7 @@ public class ServerThread extends Thread {
                 String finalMessage = message;
                 Platform.runLater(() ->
                         drawFunction.accept(Dot.fromMessage(finalMessage))
-                ) ;
+                );
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());

@@ -12,7 +12,7 @@ public class CircleApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CircleApplication.class.getResource("app-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Circle App");
         stage.setScene(scene);
         stage.show();
     }

@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import pl.umcs.oop.powtorzeniegui.client.ServerThread;
 
+
 import java.io.IOException;
 
 public class Controller {
@@ -26,15 +27,14 @@ public class Controller {
 
     private ServerThread serverThread;
 
-
     @FXML
     private void onStartServerClicked() {
-        System.err.println("onStartServerClicked not implemented!");
+        System.out.println("Serwer jest niezależnym programem. Uruchom z klasy Server.");
     }
 
     @FXML
     private void onConnectClicked() {
-        if(serverThread != null && serverThread.isAlive()) {
+        if (serverThread != null && serverThread.isAlive()) {
             System.err.println("Już połączono!");
             return;
         }
@@ -46,39 +46,31 @@ public class Controller {
             newThread.setDrawFunction(dot -> {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
                 gc.setFill(dot.color());
-                gc.fillOval(
-                        dot.x()-dot.radius(),
-                        dot.y()-dot.radius(),
-                        dot.radius()*2,
-                        dot.radius()*2
-                );
+                gc.fillOval(dot.x() - dot.radius(), dot.y() - dot.radius(), dot.radius() * 2, dot.radius() * 2);
             });
 
+            newThread.setDaemon(true);
             newThread.start();
             this.serverThread = newThread;
+            System.out.println("Połączono z serwerem!");
         } catch (IOException e) {
-            System.err.println("Błąd połączenia z serwerem: "+e.getMessage());
+            System.err.println("Błąd połączenia z serwerem: " + e.getMessage());
         }
     }
 
     @FXML
-    private void onMouseClicked(MouseEvent e) {
-        double x = e.getX();
-        double y =e.getY();
+    public void onMouseClicked(MouseEvent event) {
+        double x = event.getX();
+        double y = event.getY();
         double radius = radiusSlider.getValue();
         Color color = colorPicker.getValue();
 
-        System.err.println("Kilknieto: ("+x+", "+y+")");
-
         Dot point = new Dot(x, y, radius, color);
-
         if (serverThread != null && serverThread.isAlive()) {
             serverThread.send(point);
         } else {
             System.err.println("Połącz się z serwerem!");
         }
+
     }
-
-
-
 }

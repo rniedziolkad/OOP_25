@@ -4,6 +4,7 @@ module pl.umcs.oop.powtorzeniegui {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens pl.umcs.oop.powtorzeniegui to javafx.fxml;
     exports pl.umcs.oop.powtorzeniegui;
